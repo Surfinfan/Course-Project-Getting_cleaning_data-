@@ -1,6 +1,6 @@
 # Course-Project-Getting_cleaning_data
 Course project of the Coursera Josh Hopkins course "Getting and Cleaning data"
-This prgam solves the problem in the final course project:
+This progam solves the problem in the final course project:
 
 1) Merges the training and the test sets to create one data set.
 2) Extracts only the measurements on the mean and standard deviation for each measurement. 
