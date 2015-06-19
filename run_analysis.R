@@ -38,6 +38,19 @@ subject_all <- rbind(subject_test, subject_train)
 ## As there are 1 new extra column (type of sample) and two other tables that will be added later to the full
 ## dataset (y and subject), I put the names of those columns also
 
+## First, I try to accomplish rules of "how the columns names should be". Let's say:
+## 1) all lowercase
+## 2) descriptive
+## 3) no strange characters ()_-
+
+## From my point of view, putting long names (std for 'standard deviation' for instance) makes the names too long
+## So I keep short names for this part
+
+labels$V2 <- tolower(labels$V2)
+labels$V2 <- sub("\\(", "", labels$V2)
+labels$V2 <- sub("\\)", "", labels$V2)
+labels$V2 <- sub("-", "", labels$V2)
+
 names(x_all) <- labels$V2
 names(x_all)[562] <- "type"
 names(y_all) <- c("y")
@@ -60,8 +73,10 @@ df_all <- cbind (df_all, subject_all)
 ## Point 2 of the problem: Extracts only the measurements on the mean and standard deviation for each measurement. 
 
 # First, extract all the columns named including "std" or "mean"
-df_meanstd <- df_all[, grep("Mean|std", labels$V2, ignore.case = TRUE)]
+df_meanstd <- df_all[, grep("mean|std", labels$V2)]
 
+# But the last 6 are not means but angles with other parameters naming XXXmeanXXX. We should quit them
+df_meanstd <- df_meanstd[, -grep("^angle", names(df_meanstd))]
 
 ## df_meanstd now contains a table with only the columsn labelled with mean ad standard deviation for each measurement
 ## This is the end of point 2) of the problem
