@@ -122,3 +122,5 @@ names(df_means)[2] <- "subject"
 ## df_means is a data.frame with one line for each activity and subject, containing the mean for each column
 ## of the original dataset
 
+## output to a file
+write.table(df_means, "./df_means.txt", row.name=FALSE)
